@@ -1,7 +1,19 @@
 import Footer from '@/components/Footer';
 import Head from 'next/head';
+import { doLogin } from '@/services/Web3Service';
+import { useState } from 'react';
 
 export default function Home() {
+
+  const [wallet, setWallet] = useState("");
+  const [error, setError] = useState("");
+  
+  function btnLoginClick() {
+    doLogin()
+      .then(wallet => setWallet(wallet))
+      .catch(err => setError(err.message))
+  }
+  
   return (
     <>
       <Head>
@@ -23,10 +35,12 @@ export default function Home() {
             <p className="lead-mb-3">Autentique-se com sua carteira, crie sua campanha ou doe para campanhas existentes.</p>
             
             <div className="d-grid gap-2 d-md-flex justify-content-md-start">
-              <button type="button" className="btn btn-primary btn-lg px-4 me-md-2">
+              <button type="button" className="btn btn-primary btn-lg px-4 me-md-2" onClick={btnLoginClick}>
                 <img src="/metamask.svg" width="64" className="me-3" />
                 Conectar com a Metamask
               </button>
+              {wallet}
+              {error}
             </div>
           </div>
         </div>
