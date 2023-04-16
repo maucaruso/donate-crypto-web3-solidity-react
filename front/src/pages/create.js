@@ -2,7 +2,7 @@ import Footer from "@/components/Footer";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-import { addCampaign } from "@/services/Web3Service";
+import { addCampaign, getLastCampaignId } from "@/services/Web3Service";
 
 export default function Donate() {
   const [campaign, setCampaign] = useState({});
@@ -15,7 +15,8 @@ export default function Donate() {
   function btnSaveClick() {
     setMessage("Salvando...");
     addCampaign(campaign)
-      .then(tx => setMessage(JSON.stringify(tx)))
+      .then(tx => getLastCampaignId())
+      .then(id => setMessage(`Campanha salva com ID <b>${id}</b>. Avise seus amigos e passe a eles esse número.`))
       .catch(err => {
         setMessage(err.message);
         console.log(err);

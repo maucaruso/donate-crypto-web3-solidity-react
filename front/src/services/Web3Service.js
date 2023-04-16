@@ -28,3 +28,8 @@ export async function addCampaign(campaign) {
   console.log(contract);
   return contract.methods.addCampaign(campaign.title, campaign.description, campaign.videoUrl, campaign.imageUrl).send();
 }
+
+export function getLastCampaignId() {
+  const contract = getContract();
+  return contract.methods.nextId().call();
+}
