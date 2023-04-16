@@ -33,3 +33,13 @@ export function getLastCampaignId() {
   const contract = getContract();
   return contract.methods.nextId().call();
 }
+
+export function getCampaign(id) {
+  const contract = getContract();
+  return contract.methods.campaigns(id).call();
+}
+
+export function donate(id, donation) {
+  const contract = getContract();
+  return contract.methods.donate(id).send({ value: Web3.utils.toWei(donation, "ether") });
+}

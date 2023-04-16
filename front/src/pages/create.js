@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { addCampaign, getLastCampaignId } from "@/services/Web3Service";
 
-export default function Donate() {
+export default function Create() {
   const [campaign, setCampaign] = useState({});
   const [message, setMessage] = useState("");
 
